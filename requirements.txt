@@ -3,7 +3,7 @@ jupyterlite-core==0.1.1
 jupyterlab~=3.5.1
 
 # Python kernel (optional)
-jupyterlite-pyodide-kernel==0.0.10
+jupyterlite-pyodide-kernel==0.4.1
 
 # Python: ipywidget library for Jupyter notebooks (optional)
 ipywidgets==8.1.3
