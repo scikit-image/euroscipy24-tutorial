@@ -1,7 +1,7 @@
-# scikit-image tutorial at EuroSciPy 2023
+# scikit-image tutorial at EuroSciPy 2024
 
 This repository contains the teaching materials for the scikit-image tutorial
-at EuroSciPy 2023.
+at EuroSciPy 2024.
 
 ## Source
 
