@@ -144,10 +144,16 @@ jupyterlite-core==0.4.0
     #   jupyterlite-pyodide-kernel
 jupyterlite-pyodide-kernel==0.4.1
     # via -r requirements/jupyterlite.in
+jupytext==1.16.4
+    # via -r requirements/jupyterlite.in
 kiwisolver==1.4.5
     # via matplotlib
 lazy-loader==0.4
     # via scikit-image
+markdown-it-py==3.0.0
+    # via
+    #   jupytext
+    #   mdit-py-plugins
 markupsafe==2.1.5
     # via
     #   jinja2
@@ -160,6 +166,10 @@ matplotlib-inline==0.1.7
     # via
     #   ipykernel
     #   ipython
+mdit-py-plugins==0.4.1
+    # via jupytext
+mdurl==0.1.2
+    # via markdown-it-py
 mistune==3.0.2
     # via nbconvert
 nbclassic==1.1.0
@@ -175,6 +185,7 @@ nbconvert==7.16.4
 nbformat==5.10.4
     # via
     #   jupyter-server
+    #   jupytext
     #   nbclient
     #   nbconvert
     #   notebook
@@ -209,6 +220,7 @@ packaging==24.1
     #   jupyter-server
     #   jupyterlab
     #   jupyterlab-server
+    #   jupytext
     #   lazy-loader
     #   matplotlib
     #   nbconvert
@@ -268,7 +280,9 @@ python-json-logger==2.0.7
 pytz==2024.1
     # via pandas
 pyyaml==6.0.2
-    # via jupyter-events
+    # via
+    #   jupyter-events
+    #   jupytext
 pyzmq==26.1.1
     # via
     #   ipykernel

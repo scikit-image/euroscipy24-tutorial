@@ -1,6 +1,7 @@
 # Core modules (mandatory)
 jupyterlite-core>=0.4.0
 jupyterlab~=3.5.1
+jupytext
 
 # Python kernel (optional)
 jupyterlite-pyodide-kernel==0.4.1
