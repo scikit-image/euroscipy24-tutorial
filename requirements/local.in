@@ -1,0 +1,9 @@
+jupyterlab
+jupytext
+notebook
+matplotlib
+scikit-image
+pooch
+ipywidgets
+seaborn
+ipympl
