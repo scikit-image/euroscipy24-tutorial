@@ -2,7 +2,7 @@
 
 This repository contains the teaching materials for the [scikit-image tutorial at EuroSciPy 2024](https://pretalx.com/euroscipy-2024/talk/ZVBAKK/).
 
-> [!IMPORTANT] \
+> [!IMPORTANT]  
 > The tutorial is intended to be run in the browser. \
 > **[Open the online tutorial here](https://scikit-image.org/euroscipy24-tutorial/)**!
 
