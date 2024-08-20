@@ -134,6 +134,8 @@ def convolve_demo(signal, kernel):
                    signal[i : i+ksize])
         ax.scatter(i, convolved[i])
         plt.show()
+        fig.canvas.draw_idle()
+
     return filter_step
 
 from ipywidgets import interact, widgets
@@ -212,6 +214,8 @@ def convolve_demo_same(signal, kernel):
         ax.set_xlim(-ksize // 2,
                     len(signal) + ksize // 2)
         plt.show()
+        fig.canvas.draw_idle()
+
     return filter_step
 
 
@@ -501,6 +505,8 @@ def mean_filter_demo(image, vmax=1):
             ax.add_patch(rect)
 
         plt.show()
+        fig.canvas.draw_idle()
+
     return mean_filter_step
 
 
