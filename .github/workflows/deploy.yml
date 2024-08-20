@@ -17,16 +17,20 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - name: Install the dependencies
         run: |
           python -m pip install -r requirements/jupyterlite.txt
-      - name: Convert to ipynb format
+      - name: Prepare directory
+        # Jupytext is not supported in JupyterLite yet
+        # Using plain ipynb format is also simpler to teach
         run: |
-          find tutorial/ -name "*.md" -exec jupytext --to ipynb {} \;
+          find tutorial/ -name "*.md" \
+            -exec jupytext --to ipynb {} \; \
+            -exec rm {} \;
+          cp README.md tutorial
       - name: Build the JupyterLite site
         run: |
-          cp README.md tutorial
           jupyter lite build --contents tutorial --output-dir dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
