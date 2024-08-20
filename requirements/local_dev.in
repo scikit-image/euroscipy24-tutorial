@@ -1,4 +1,4 @@
-jupyterlab
+jupyterlab>=3.6.7
 jupytext
 notebook
 matplotlib
