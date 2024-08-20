@@ -13,8 +13,8 @@ jupyter:
 ---
 
 ```python tags=["hide-cell"]
-%pip install -q ipywidgets
-%matplotlib inline
+%pip install -q ipywidgets ipympl
+%matplotlib widget
 %config InlineBackend.figure_format = 'retina'
 ```
 
