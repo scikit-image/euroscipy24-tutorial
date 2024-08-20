@@ -36,7 +36,13 @@ charset-normalizer==3.3.2
 cloudpickle==3.0.0
     # via doit
 comm==0.2.2
-    # via ipykernel
+    # via
+    #   ipykernel
+    #   ipywidgets
+contourpy==1.2.1
+    # via matplotlib
+cycler==0.12.1
+    # via matplotlib
 debugpy==1.8.5
     # via ipykernel
 decorator==5.1.1
@@ -51,6 +57,8 @@ executing==2.0.1
     # via stack-data
 fastjsonschema==2.20.0
     # via nbformat
+fonttools==4.53.1
+    # via matplotlib
 fqdn==1.5.1
     # via jsonschema
 h11==0.14.0
@@ -67,10 +75,24 @@ idna==3.7
     #   requests
 importlib-metadata==8.2.0
     # via doit
+ipyevents==2.0.2
+    # via -r requirements/jupyterlite.in
 ipykernel==6.29.5
     # via jupyterlab
+ipympl==0.9.4
+    # via -r requirements/jupyterlite.in
 ipython==8.26.0
-    # via ipykernel
+    # via
+    #   ipykernel
+    #   ipympl
+    #   ipywidgets
+ipython-genutils==0.2.0
+    # via ipympl
+ipywidgets==8.1.3
+    # via
+    #   -r requirements/jupyterlite.in
+    #   ipyevents
+    #   ipympl
 isoduration==20.11.0
     # via jsonschema
 jedi==0.19.1
@@ -125,6 +147,8 @@ jupyterlab-pygments==0.3.0
     # via nbconvert
 jupyterlab-server==2.27.3
     # via jupyterlab
+jupyterlab-widgets==3.0.11
+    # via ipywidgets
 jupyterlite-core==0.3.0
     # via
     #   -r requirements/jupyterlite.in
@@ -133,6 +157,8 @@ jupyterlite-pyodide-kernel==0.3.2
     # via -r requirements/jupyterlite.in
 jupytext==1.16.4
     # via -r requirements/jupyterlite.in
+kiwisolver==1.4.5
+    # via matplotlib
 markdown-it-py==3.0.0
     # via
     #   jupytext
@@ -141,6 +167,8 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   nbconvert
+matplotlib==3.9.2
+    # via ipympl
 matplotlib-inline==0.1.7
     # via
     #   ipykernel
@@ -167,6 +195,11 @@ nest-asyncio==1.6.0
     #   jupyter-client
 notebook-shim==0.2.4
     # via jupyterlab
+numpy==2.1.0
+    # via
+    #   contourpy
+    #   ipympl
+    #   matplotlib
 overrides==7.7.0
     # via jupyter-server
 packaging==24.1
@@ -176,6 +209,7 @@ packaging==24.1
     #   jupyterlab
     #   jupyterlab-server
     #   jupytext
+    #   matplotlib
     #   nbconvert
 pandocfilters==1.5.1
     # via nbconvert
@@ -183,6 +217,10 @@ parso==0.8.4
     # via jedi
 pexpect==4.9.0
     # via ipython
+pillow==10.4.0
+    # via
+    #   ipympl
+    #   matplotlib
 pkginfo==1.11.1
     # via jupyterlite-pyodide-kernel
 platformdirs==4.2.2
@@ -205,10 +243,13 @@ pygments==2.18.0
     # via
     #   ipython
     #   nbconvert
+pyparsing==3.1.2
+    # via matplotlib
 python-dateutil==2.9.0.post0
     # via
     #   arrow
     #   jupyter-client
+    #   matplotlib
 python-json-logger==2.0.7
     # via jupyter-events
 pyyaml==6.0.2
@@ -274,7 +315,9 @@ traitlets==5.14.3
     # via
     #   comm
     #   ipykernel
+    #   ipympl
     #   ipython
+    #   ipywidgets
     #   jupyter-client
     #   jupyter-core
     #   jupyter-events
@@ -300,5 +343,7 @@ webencodings==0.5.1
     #   tinycss2
 websocket-client==1.8.0
     # via jupyter-server
+widgetsnbextension==4.0.11
+    # via ipywidgets
 zipp==3.20.0
     # via importlib-metadata
