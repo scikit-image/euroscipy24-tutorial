@@ -36,13 +36,7 @@ charset-normalizer==3.3.2
 cloudpickle==3.0.0
     # via doit
 comm==0.2.2
-    # via
-    #   ipykernel
-    #   ipywidgets
-contourpy==1.2.1
-    # via matplotlib
-cycler==0.12.1
-    # via matplotlib
+    # via ipykernel
 debugpy==1.8.5
     # via ipykernel
 decorator==5.1.1
@@ -57,8 +51,6 @@ executing==2.0.1
     # via stack-data
 fastjsonschema==2.20.0
     # via nbformat
-fonttools==4.53.1
-    # via matplotlib
 fqdn==1.5.1
     # via jsonschema
 h11==0.14.0
@@ -73,18 +65,12 @@ idna==3.7
     #   httpx
     #   jsonschema
     #   requests
-imageio==2.35.1
-    # via scikit-image
 importlib-metadata==8.2.0
     # via doit
 ipykernel==6.29.5
     # via jupyterlab
 ipython==8.26.0
-    # via
-    #   ipykernel
-    #   ipywidgets
-ipywidgets==8.1.3
-    # via -r requirements/jupyterlite.in
+    # via ipykernel
 isoduration==20.11.0
     # via jsonschema
 jedi==0.19.1
@@ -95,8 +81,6 @@ jinja2==3.1.4
     #   jupyterlab
     #   jupyterlab-server
     #   nbconvert
-joblib==1.4.2
-    # via scikit-learn
 json5==0.9.25
     # via jupyterlab-server
 jsonpointer==3.0.0
@@ -141,20 +125,14 @@ jupyterlab-pygments==0.3.0
     # via nbconvert
 jupyterlab-server==2.27.3
     # via jupyterlab
-jupyterlab-widgets==3.0.11
-    # via ipywidgets
-jupyterlite-core==0.4.0
+jupyterlite-core==0.3.0
     # via
     #   -r requirements/jupyterlite.in
     #   jupyterlite-pyodide-kernel
-jupyterlite-pyodide-kernel==0.4.1
+jupyterlite-pyodide-kernel==0.3.2
     # via -r requirements/jupyterlite.in
 jupytext==1.16.4
     # via -r requirements/jupyterlite.in
-kiwisolver==1.4.5
-    # via matplotlib
-lazy-loader==0.4
-    # via scikit-image
 markdown-it-py==3.0.0
     # via
     #   jupytext
@@ -163,10 +141,6 @@ markupsafe==2.1.5
     # via
     #   jinja2
     #   nbconvert
-matplotlib==3.9.2
-    # via
-    #   -r requirements/jupyterlite.in
-    #   seaborn
 matplotlib-inline==0.1.7
     # via
     #   ipykernel
@@ -191,21 +165,8 @@ nest-asyncio==1.6.0
     # via
     #   ipykernel
     #   jupyter-client
-networkx==3.3
-    # via scikit-image
 notebook-shim==0.2.4
     # via jupyterlab
-numpy==2.1.0
-    # via
-    #   contourpy
-    #   imageio
-    #   matplotlib
-    #   pandas
-    #   scikit-image
-    #   scikit-learn
-    #   scipy
-    #   seaborn
-    #   tifffile
 overrides==7.7.0
     # via jupyter-server
 packaging==24.1
@@ -215,32 +176,17 @@ packaging==24.1
     #   jupyterlab
     #   jupyterlab-server
     #   jupytext
-    #   lazy-loader
-    #   matplotlib
     #   nbconvert
-    #   pooch
-    #   scikit-image
-pandas==2.2.2
-    # via seaborn
 pandocfilters==1.5.1
     # via nbconvert
 parso==0.8.4
     # via jedi
 pexpect==4.9.0
     # via ipython
-pillow==10.4.0
-    # via
-    #   imageio
-    #   matplotlib
-    #   scikit-image
 pkginfo==1.11.1
     # via jupyterlite-pyodide-kernel
 platformdirs==4.2.2
-    # via
-    #   jupyter-core
-    #   pooch
-pooch==1.8.2
-    # via -r requirements/jupyterlite.in
+    # via jupyter-core
 prometheus-client==0.20.0
     # via jupyter-server
 prompt-toolkit==3.0.47
@@ -259,18 +205,12 @@ pygments==2.18.0
     # via
     #   ipython
     #   nbconvert
-pyparsing==3.1.2
-    # via matplotlib
 python-dateutil==2.9.0.post0
     # via
     #   arrow
     #   jupyter-client
-    #   matplotlib
-    #   pandas
 python-json-logger==2.0.7
     # via jupyter-events
-pytz==2024.1
-    # via pandas
 pyyaml==6.0.2
     # via
     #   jupyter-events
@@ -286,9 +226,7 @@ referencing==0.35.1
     #   jsonschema-specifications
     #   jupyter-events
 requests==2.32.3
-    # via
-    #   jupyterlab-server
-    #   pooch
+    # via jupyterlab-server
 rfc3339-validator==0.1.4
     # via
     #   jsonschema
@@ -301,16 +239,6 @@ rpds-py==0.20.0
     # via
     #   jsonschema
     #   referencing
-scikit-image==0.24.0
-    # via -r requirements/jupyterlite.in
-scikit-learn==1.5.0
-    # via -r requirements/jupyterlite.in
-scipy==1.14.0
-    # via
-    #   scikit-image
-    #   scikit-learn
-seaborn==0.13.2
-    # via -r requirements/jupyterlite.in
 send2trash==1.8.3
     # via jupyter-server
 setuptools==73.0.0
@@ -333,10 +261,6 @@ terminado==0.18.1
     # via
     #   jupyter-server
     #   jupyter-server-terminals
-threadpoolctl==3.5.0
-    # via scikit-learn
-tifffile==2024.8.10
-    # via scikit-image
 tinycss2==1.3.0
     # via nbconvert
 tornado==6.4.1
@@ -351,7 +275,6 @@ traitlets==5.14.3
     #   comm
     #   ipykernel
     #   ipython
-    #   ipywidgets
     #   jupyter-client
     #   jupyter-core
     #   jupyter-events
@@ -363,8 +286,6 @@ traitlets==5.14.3
     #   nbformat
 types-python-dateutil==2.9.0.20240316
     # via arrow
-tzdata==2024.1
-    # via pandas
 uri-template==1.3.0
     # via jsonschema
 urllib3==2.2.2
@@ -379,7 +300,5 @@ webencodings==0.5.1
     #   tinycss2
 websocket-client==1.8.0
     # via jupyter-server
-widgetsnbextension==4.0.11
-    # via ipywidgets
 zipp==3.20.0
     # via importlib-metadata
