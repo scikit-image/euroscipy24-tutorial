@@ -168,7 +168,9 @@ markupsafe==2.1.5
     #   jinja2
     #   nbconvert
 matplotlib==3.9.2
-    # via ipympl
+    # via
+    #   -r requirements/jupyterlite.in
+    #   ipympl
 matplotlib-inline==0.1.7
     # via
     #   ipykernel
