@@ -1,12 +1,18 @@
 # scikit-image tutorial at EuroSciPy 2024
 
-This repository contains the teaching materials for the scikit-image tutorial
-at EuroSciPy 2024.
+This repository contains the teaching materials for the [scikit-image tutorial at EuroSciPy 2024](https://pretalx.com/euroscipy-2024/talk/ZVBAKK/).
+
+> [!IMPORTANT] \
+> The tutorial is intended to be run in the browser. \
+> **[Open the online tutorial here](https://scikit-image.org/euroscipy24-tutorial/)**!
 
 
-## Development
+## Contributing
 
 ### Run notebooks in local environment
+
+Updating the notebooks is best accomplished inside a local environment.
+Create a new virtual environment with Python 3.12 and install the dependencies into it with
 
 ```shell
 python -m pip install -r requirements/local_dev.txt
@@ -27,7 +33,14 @@ Setup the required dependencies with
 python -m pip install -r requirements/jupyterlite.txt
 ```
 
-and then run
+This repository stores the notebooks in markdown format with the help of [Jupytext](https://jupytext.readthedocs.io/en/latest/) which is not yet supported by JupyterLite.
+So we need to convert the notebooks into the `ipynb` format with
+
+```shell
+find tutorial/ -name "*.md" -exec jupytext --to ipynb {} \;
+```
+
+then build & serve the site:
 
 ```shell
 jupyter lite build --content tutorial/
