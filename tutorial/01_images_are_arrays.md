@@ -161,58 +161,6 @@ print(image.min(), image.max())
 plt.imshow(image);
 ```
 
-We also have the ability to load multiple images from a folder:
-
-```python
-ic = ski.io.ImageCollection(['./*.png', './data/*.png', './data/*.jpg'])
-
-print('Type:', type(ic))
-
-ic.files
-```
-
-```python
-import os
-
-def plot_collection(ic : ski.io.ImageCollection):
-    """Display images in an ImageCollection in a grid.
-
-    """
-    f, axes = plt.subplots(ncols=3, nrows=int(np.ceil(len(ic) / 3)))
-
-    # subplots returns the figure and an array of axes
-    # we use `axes.ravel()` to turn these into a list
-    axes = axes.ravel()
-
-    for ax in axes:
-        # Hide axis labels
-        ax.axis('off')
-
-    for i, image in enumerate(ic):
-        axes[i].imshow(image, cmap='gray')
-        axes[i].set_title(os.path.basename(ic.files[i]))
-    
-    plt.tight_layout()
-```
-
-```python
-plot_collection(ic)
-```
-
-<!-- #region jp-MarkdownHeadingCollapsed=true -->
-### Aside: `enumerate`
-
-`enumerate` gives us each element in a container, along with its position.
-<!-- #endregion -->
-
-```python
-animals = ['cat', 'dog', 'leopard']
-```
-
-```python
-for i, animal in enumerate(animals):
-    print('The animal in position {} is {}'.format(i, animal))
-```
 
 ## Exercise 1: draw the letter H
 
