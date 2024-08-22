@@ -95,35 +95,6 @@ Images can also include transparent regions by adding a 4th channel, called an *
 |3D multichannel|(plane, row, column, channel)|
 
 
-## Displaying images using matplotlib
-
-```python
-img0 = ski.data.chelsea()
-img1 = ski.data.rocket()
-```
-
-```python
-import matplotlib.pyplot as plt
-
-f, (ax0, ax1) = plt.subplots(1, 2, figsize=(20, 10))
-
-ax0.imshow(img0)
-ax0.set_title('Cat', fontsize=18)
-ax0.axis('off')
-
-ax1.imshow(img1)
-ax1.set_title('Rocket', fontsize=18)
-ax1.set_xlabel(r'Launching position $\alpha=320$')
-
-ax1.vlines([202, 300], 0, img1.shape[0], colors='magenta', linewidth=3, label='Side tower position')
-ax1.plot([168, 190, 200], [400, 200, 300], color='white', linestyle='--', label='Side angle')
-
-ax1.legend();
-```
-
-For more on plotting, see the [Matplotlib documentation](https://matplotlib.org/gallery/index.html#images-contours-and-fields) and [pyplot API](https://matplotlib.org/api/pyplot_summary.html).
-
-
 ## Data types and image values
 
 In literature, one finds different conventions for representing image values:
