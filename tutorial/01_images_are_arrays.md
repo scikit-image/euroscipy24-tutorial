@@ -24,22 +24,19 @@ import skimage as ski
 print(f'skimage {ski.__version__}')
 ```
 
-*Note: NumPy 2.0 was released recently. scikit-image 0.24 is compatible.*
+*Note: NumPy 2.0 was released recently; scikit-image 0.24 is compatible.*
 
 
-⚠️ Note the import convention above: `import skimage as ski`. If you forget to import `skimage`, all the examples below will fail to execute!
+⚠️ Note the import convention above: `import skimage as ski`.
+If you don't import `skimage`, the examples below will fail to execute.
 
 
 # Part 1: Images are numpy arrays
 
 
-Images are represented in ``scikit-image`` using standard ``numpy`` arrays.  This allows maximum inter-operability with other libraries in the scientific Python ecosystem, such as ``matplotlib`` and ``scipy``.
+Images are represented in ``scikit-image`` using standard ``numpy`` arrays.  This allows maximum interoperability with other libraries in the scientific Python ecosystem, such as ``matplotlib`` and ``scipy``.
 
-Let's see how to build a grayscale image as a 2D array:
-
-```python
-import matplotlib.pyplot as plt
-```
+Let's build a grayscale image as a 2D array:
 
 ```python
 rng = np.random.default_rng(44)
@@ -48,6 +45,8 @@ random_image.shape, random_image.dtype
 ```
 
 ```python
+import matplotlib.pyplot as plt
+
 plt.imshow(random_image, cmap='gray')
 plt.colorbar();
 ```
@@ -64,7 +63,7 @@ print('shape:', coins.shape)
 plt.imshow(coins, cmap='gray');
 ```
 
-A color image is a 3D array, where the last dimension has size 3 and represents the red, green, and blue channels:
+A color image is a 3D array, where the last dimension has length 3 and contains the red, green, and blue channels:
 
 ```python
 cat = ski.data.chelsea()
@@ -82,7 +81,7 @@ cat[10:110, 10:110, :] = [255, 0, 0]  # [red, green, blue]
 plt.imshow(cat);
 ```
 
-Images can also include transparent regions by adding a 4th channel, called an *alpha layer*.
+Images can also include transparency, which is represented by a 4th channel, called the *alpha layer*.
 
 
 ## Other shapes, and their meanings
@@ -93,6 +92,8 @@ Images can also include transparent regions by adding a 4th channel, called an *
 |2D multichannel|(row, column, channel)|
 |3D grayscale (or volumetric) |(plane, row, column)|
 |3D multichannel|(plane, row, column, channel)|
+
+See [Coordinate conventions](https://scikit-image.org/docs/stable/user_guide/numpy_images.html#coordinate-conventions).
 
 
 ## Data types and image values
@@ -105,9 +106,9 @@ In literature, one finds different conventions for representing image values:
 ```
 
 ``scikit-image`` supports both conventions—the choice is determined by the
-data-type of the array.
+data type of the array.
 
-E.g., here, I generate two valid images:
+E.g., here, we generate two equally valid images:
 
 ```python
 linear0 = np.linspace(0, 1, 2500).reshape((50, 50))
@@ -140,9 +141,12 @@ print()
 print("231/255 =", 231/255.)
 ```
 
+More at https://scikit-image.org/docs/stable/user_guide/data_types.html.
+
+
 ## Image I/O
 
-Mostly, we won't be using images from the scikit-image example data sets, but images stored on disk in JPEG, PNG, or TIFF format.  Since scikit-image operates on NumPy arrays, *any* image reader library that returns arrays will do.  We recommend `imageio`, but `matplotlib`, `pillow`, etc. also work.
+Mostly, we won't be using images from the scikit-image example datasets, but images stored on disk in JPEG, PNG, or TIFF format. Since scikit-image operates on NumPy arrays, *any* image reader library that returns arrays will do. We recommend `imageio`, but `matplotlib`, `pillow`, etc. also work.
 
 scikit-image provides a convenience wrapper around `image`, in the form of the `skimage.io` submodule:
 
