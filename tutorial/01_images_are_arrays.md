@@ -24,22 +24,19 @@ import skimage as ski
 print(f'skimage {ski.__version__}')
 ```
 
-*Note: NumPy 2.0 was released recently. scikit-image 0.24 is compatible.*
+*Note: NumPy 2.0 was released recently; scikit-image 0.24 is compatible.*
 
 
-⚠️ Note the import convention above: `import skimage as ski`. If you forget to import `skimage`, all the examples below will fail to execute!
+⚠️ Note the import convention above: `import skimage as ski`.
+If you don't import `skimage`, the examples below will fail to execute.
 
 
 # Part 1: Images are numpy arrays
 
 
-Images are represented in ``scikit-image`` using standard ``numpy`` arrays.  This allows maximum inter-operability with other libraries in the scientific Python ecosystem, such as ``matplotlib`` and ``scipy``.
+Images are represented in ``scikit-image`` using standard ``numpy`` arrays.  This allows maximum interoperability with other libraries in the scientific Python ecosystem, such as ``matplotlib`` and ``scipy``.
 
-Let's see how to build a grayscale image as a 2D array:
-
-```python
-import matplotlib.pyplot as plt
-```
+Let's build a grayscale image as a 2D array:
 
 ```python
 rng = np.random.default_rng(44)
@@ -48,6 +45,8 @@ random_image.shape, random_image.dtype
 ```
 
 ```python
+import matplotlib.pyplot as plt
+
 plt.imshow(random_image, cmap='gray')
 plt.colorbar();
 ```
@@ -64,7 +63,7 @@ print('shape:', coins.shape)
 plt.imshow(coins, cmap='gray');
 ```
 
-A color image is a 3D array, where the last dimension has size 3 and represents the red, green, and blue channels:
+A color image is a 3D array, where the last dimension has length 3 and contains the red, green, and blue channels:
 
 ```python
 cat = ski.data.chelsea()
@@ -82,7 +81,7 @@ cat[10:110, 10:110, :] = [255, 0, 0]  # [red, green, blue]
 plt.imshow(cat);
 ```
 
-Images can also include transparent regions by adding a 4th channel, called an *alpha layer*.
+Images can also include transparency, which is represented by a 4th channel, called the *alpha layer*.
 
 
 ## Other shapes, and their meanings
@@ -94,34 +93,7 @@ Images can also include transparent regions by adding a 4th channel, called an *
 |3D grayscale (or volumetric) |(plane, row, column)|
 |3D multichannel|(plane, row, column, channel)|
 
-
-## Displaying images using matplotlib
-
-```python
-img0 = ski.data.chelsea()
-img1 = ski.data.rocket()
-```
-
-```python
-import matplotlib.pyplot as plt
-
-f, (ax0, ax1) = plt.subplots(1, 2, figsize=(20, 10))
-
-ax0.imshow(img0)
-ax0.set_title('Cat', fontsize=18)
-ax0.axis('off')
-
-ax1.imshow(img1)
-ax1.set_title('Rocket', fontsize=18)
-ax1.set_xlabel(r'Launching position $\alpha=320$')
-
-ax1.vlines([202, 300], 0, img1.shape[0], colors='magenta', linewidth=3, label='Side tower position')
-ax1.plot([168, 190, 200], [400, 200, 300], color='white', linestyle='--', label='Side angle')
-
-ax1.legend();
-```
-
-For more on plotting, see the [Matplotlib documentation](https://matplotlib.org/gallery/index.html#images-contours-and-fields) and [pyplot API](https://matplotlib.org/api/pyplot_summary.html).
+See [Coordinate conventions](https://scikit-image.org/docs/stable/user_guide/numpy_images.html#coordinate-conventions).
 
 
 ## Data types and image values
@@ -134,9 +106,9 @@ In literature, one finds different conventions for representing image values:
 ```
 
 ``scikit-image`` supports both conventions—the choice is determined by the
-data-type of the array.
+data type of the array.
 
-E.g., here, I generate two valid images:
+E.g., here, we generate two equally valid images:
 
 ```python
 linear0 = np.linspace(0, 1, 2500).reshape((50, 50))
@@ -169,9 +141,12 @@ print()
 print("231/255 =", 231/255.)
 ```
 
+More at https://scikit-image.org/docs/stable/user_guide/data_types.html.
+
+
 ## Image I/O
 
-Mostly, we won't be using images from the scikit-image example data sets, but images stored on disk in JPEG, PNG, or TIFF format.  Since scikit-image operates on NumPy arrays, *any* image reader library that returns arrays will do.  We recommend `imageio`, but `matplotlib`, `pillow`, etc. also work.
+Mostly, we won't be using images from the scikit-image example datasets, but images stored on disk in JPEG, PNG, or TIFF format. Since scikit-image operates on NumPy arrays, *any* image reader library that returns arrays will do. We recommend `imageio`, but `matplotlib`, `pillow`, etc. also work.
 
 scikit-image provides a convenience wrapper around `image`, in the form of the `skimage.io` submodule:
 
@@ -186,58 +161,6 @@ print(image.min(), image.max())
 plt.imshow(image);
 ```
 
-We also have the ability to load multiple images from a folder:
-
-```python
-ic = ski.io.ImageCollection(['./*.png', './data/*.png', './data/*.jpg'])
-
-print('Type:', type(ic))
-
-ic.files
-```
-
-```python
-import os
-
-def plot_collection(ic : ski.io.ImageCollection):
-    """Display images in an ImageCollection in a grid.
-
-    """
-    f, axes = plt.subplots(ncols=3, nrows=int(np.ceil(len(ic) / 3)))
-
-    # subplots returns the figure and an array of axes
-    # we use `axes.ravel()` to turn these into a list
-    axes = axes.ravel()
-
-    for ax in axes:
-        # Hide axis labels
-        ax.axis('off')
-
-    for i, image in enumerate(ic):
-        axes[i].imshow(image, cmap='gray')
-        axes[i].set_title(os.path.basename(ic.files[i]))
-    
-    plt.tight_layout()
-```
-
-```python
-plot_collection(ic)
-```
-
-<!-- #region jp-MarkdownHeadingCollapsed=true -->
-### Aside: `enumerate`
-
-`enumerate` gives us each element in a container, along with its position.
-<!-- #endregion -->
-
-```python
-animals = ['cat', 'dog', 'leopard']
-```
-
-```python
-for i, animal in enumerate(animals):
-    print('The animal in position {} is {}'.format(i, animal))
-```
 
 ## Exercise 1: draw the letter H
 
