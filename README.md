@@ -4,7 +4,7 @@ This repository contains the teaching materials for the [scikit-image tutorial a
 
 > [!IMPORTANT]  
 > The tutorial is intended to be run in the browser. \
-> **[Open the online tutorial here](https://scikit-image.org/euroscipy24-tutorial/)**!
+> **[Open the online tutorial here](https://scikit-image.org/euroscipy24-tutorial/lab/index.html?path=00_start.ipynb)**!
 
 
 ## Contributing
