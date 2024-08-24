@@ -43,7 +43,7 @@ find tutorial/ -name "*.md" -exec jupytext --to ipynb {} \;
 then build & serve the site:
 
 ```shell
-jupyter lite build --content tutorial/
+jupyter lite build --contents tutorial/
 jupyter lite serve
 ```
 
