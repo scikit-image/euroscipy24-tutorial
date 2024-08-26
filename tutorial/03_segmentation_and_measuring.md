@@ -265,26 +265,40 @@ print("Max coin size in pixels:", np.max([r.area for r in regions]))
 
 See https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops or `help(ski.measure.regionprops)` for the full list of properties.
 
-+++
+```{code-cell} ipython3
+rp = ski.measure.regionprops_table(coin_labels, properties=('label', 'area', 'centroid', 'eccentricity'))
+rp
+```
 
+```{code-cell} ipython3
+import pandas as pd
+pd.DataFrame(rp).head()
+```
+
+<div style="margin-top: 30rem;">
+    
 ## Segmenting nuclei and measuring cell properties
 
+This example repeats the steps above, but on a 3D dataset, using Napari for interactive visualization and marker annotation. It is accompanied by narrative documentation, so that you can try it by yourself after the tutorial.
+
+<span style="color: red; font-weight: bold;">NOTE: Napari does not run in a JupyterLite (web) installation; you will have to install Python locally first, as well as the tutorial dependencies:
+
+```sh
+python -m pip install -r requirements/jupyterlite.txt
+```
+
 +++
+
+----
 
 In the rest of this notebook, we will segment cell nuclei from a small sample image provided by the Allen Institute for Cell Science.
 
 ```{code-cell} ipython3
-import numpy as np
+cells3d = ski.data.cells3d()
 ```
 
 ```{code-cell} ipython3
-from skimage import data
-
-cells3d = data.cells3d()
-```
-
-```{code-cell} ipython3
-cells3d.shape  # zcyx
+cells3d.shape  # z, color, y, x
 ```
 
 ```{code-cell} ipython3
@@ -304,6 +318,9 @@ spacing = np.array([0.29, 0.26, 0.26])
 We can view the 3D image using napari.
 
 ```{code-cell} ipython3
+import napari
+from napari.utils import nbscreenshot
+
 viewer, (membrane_layer, nuclei_layer) = napari.imshow(
     cells3d,
     channel_axis=1,  # remember, Python uses 0-based indexing!
@@ -333,10 +350,7 @@ nuclei = cells3d[:, 1, :, :] / np.max(cells3d)
 ```
 
 ```{code-cell} ipython3
-from skimage import filters
-
-
-edges = filters.farid(nuclei)
+edges = ski.filters.farid(nuclei)
 
 edges_layer = viewer.add_image(
     edges,
@@ -359,11 +373,11 @@ nbscreenshot(viewer)
 Different thresholding algorithms produce different results. [Otsu's method](https://en.wikipedia.org/wiki/Otsu%27s_method) and [Li's minimum cross entropy threshold](https://scikit-image.org/docs/dev/auto_examples/developers/plot_threshold_li.html) are two common algorithms. Below, we use Li. You can use `skimage.filters.threshold_<TAB>` to find different thresholding methods.
 
 ```{code-cell} ipython3
-denoised = ndi.median_filter(nuclei, size=3)
+denoised = sp.ndimage.median_filter(nuclei, size=3)
 ```
 
 ```{code-cell} ipython3
-li_thresholded = denoised > filters.threshold_li(denoised)
+li_thresholded = denoised > ski.filters.threshold_li(denoised)
 ```
 
 ```{code-cell} ipython3
@@ -399,13 +413,9 @@ Functions operating on [connected components](https://en.wikipedia.org/wiki/Conn
 `skimage.morphology.remove_small_holes` fills holes and `skimage.morphology.remove_small_objects` removes bright regions. Both functions accept a size parameter, which is the minimum size (in pixels) of accepted holes or objects. It's useful in 3D to think in linear dimensions, then cube them. In this case, we remove holes / objects of the same size as a cube 20 pixels across.
 
 ```{code-cell} ipython3
-from skimage import morphology
-```
-
-```{code-cell} ipython3
 width = 20
 
-remove_holes = morphology.remove_small_holes(
+remove_holes = ski.morphology.remove_small_holes(
     li_thresholded, width ** 3
 )
 ```
@@ -413,7 +423,7 @@ remove_holes = morphology.remove_small_holes(
 ```{code-cell} ipython3
 width = 20
 
-remove_objects = morphology.remove_small_objects(
+remove_objects = ski.morphology.remove_small_objects(
     remove_holes, width ** 3
 )
 
@@ -440,9 +450,7 @@ nbscreenshot(viewer)
 Now we are ready to label the connected components of this image.
 
 ```{code-cell} ipython3
-from skimage import measure
-
-labels = measure.label(remove_objects)
+labels = ski.measure.label(remove_objects)
 
 viewer.add_labels(
     labels,
@@ -474,11 +482,11 @@ A common approach, which we saw above with the two overlapping circles, is to co
 As you will see below, it can be quite challenging to find markers with the right location. A slight amount of noise in the image can result in very wrong point locations.
 
 ```{code-cell} ipython3
-transformed = ndi.distance_transform_edt(
+transformed = sp.ndimage.distance_transform_edt(
     remove_objects, sampling=spacing
 )
 
-maxima = morphology.local_maxima(transformed)
+maxima = ski.morphology.local_maxima(transformed)
 viewer.add_points(
     np.transpose(np.nonzero(maxima)),
     name='bad points',
@@ -584,15 +592,13 @@ nbscreenshot(viewer)
 Once you have marked all the points, you can grab the data back, and make a markers image for `skimage.segmentation.watershed`:
 
 ```{code-cell} ipython3
-from skimage import segmentation, util
-
 marker_locations = points.data
 
 
-markers = util.label_points(marker_locations, nuclei.shape)
-markers_big = morphology.dilation(markers, morphology.ball(5))
+markers = ski.util.label_points(marker_locations, nuclei.shape)
+markers_big = ski.morphology.dilation(markers, morphology.ball(5))
 
-segmented = segmentation.watershed(
+segmented = ski.segmentation.watershed(
     edges,
     markers_big,
     mask=remove_objects,
@@ -637,7 +643,7 @@ segmented_padded = np.pad(
 ```
 
 ```{code-cell} ipython3
-interior_labels = segmentation.clear_border(segmented_padded)[1:-1]
+interior_labels = ski.segmentation.clear_border(segmented_padded)[1:-1]
 ```
 
 `skimage.measure.regionprops` automatically measures many labeled image features. Optionally, an `intensity_image` can be supplied and intensity features are extracted per object. It's good practice to make measurements on the original image.
@@ -645,7 +651,7 @@ interior_labels = segmentation.clear_border(segmented_padded)[1:-1]
 Not all properties are supported for 3D data. Below we build a list of supported and unsupported 3D measurements.
 
 ```{code-cell} ipython3
-regionprops = measure.regionprops(interior_labels, intensity_image=nuclei)
+regionprops = ski.measure.regionprops(interior_labels, intensity_image=nuclei)
 
 supported = [] 
 unsupported = []
@@ -679,7 +685,7 @@ import pandas as pd
 
 
 info_table = pd.DataFrame(
-    measure.regionprops_table(
+    ski.measure.regionprops_table(
         interior_labels,
         intensity_image=nuclei,
         properties=['label', 'slice', 'area', 'mean_intensity', 'solidity'],
