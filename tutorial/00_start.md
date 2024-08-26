@@ -23,3 +23,4 @@ The tutorial is aimed at folks who have some experience in scientific computing 
 
 - [Part 1: Images are just NumPy arrays](01_images_are_arrays.ipynb). In this section we will cover the basics: how to think of images not as things we can see but numbers we can analyze.
 - [Part 2: Changing the structure of images with image filtering](02_image_filtering.ipynb). In this section we will define filtering, a fundamental operation on signals (1D), images (2D), and higher-dimensional images (3D+). We will use filtering to find various structures in images, such as blobs and edges.
+- [Part 3: Finding regions in images and measuring their properties](03_segmentation_and_measuring.ipynb). In this section we will define image segmentation — splitting up images into regions. We will show how segmentation is commonly represented in the scientific Python ecosystem, some basic and advanced methods to do it, and use it to make object measurements.
