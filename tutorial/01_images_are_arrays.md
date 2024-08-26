@@ -195,7 +195,7 @@ Display the different color channels of the image (each as a gray-scale image). 
 ```python tags=["raises-exception", "remove-output"]
 # --- read in the image ---
 
-image = plt.imread('./data/Bells-Beach.jpg')
+image = ski.data.astronaut()
 
 # --- assign each color channel to a different variable ---
 
