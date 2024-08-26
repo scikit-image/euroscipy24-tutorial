@@ -139,7 +139,7 @@ cat_float = ski.util.img_as_float(cat)
 print(cat_float.dtype, cat_float.min(), cat_float.max())
 
 print()
-print("231/255 =", 231/255.)
+print("cat.max()/255 =", cat.max()/255)
 ```
 
 More at https://scikit-image.org/docs/stable/user_guide/data_types.html.
