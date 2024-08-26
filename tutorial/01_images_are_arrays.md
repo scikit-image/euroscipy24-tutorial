@@ -99,7 +99,7 @@ See [Coordinate conventions](https://scikit-image.org/docs/stable/user_guide/num
 
 ## Data types and image values
 
-In literature, one finds different conventions for representing image values:
+There are different conventions for representing image intensity values, the most common ones being:
 
 ```
   0 - 255   where  0 is black, 255 is white
@@ -107,7 +107,7 @@ In literature, one finds different conventions for representing image values:
 ```
 
 ``scikit-image`` supports both conventions—the choice is determined by the
-data type of the array.
+data type (`dtype`) of the array.
 
 E.g., here, we generate two equally valid images:
 
@@ -123,11 +123,11 @@ ax0.imshow(linear0, cmap='gray')
 ax1.imshow(linear1, cmap='gray');
 ```
 
-When we first designed the library, we always *assumed* that floating type images go from 0-1, and unsigned bytes from 0 to 255.
+When we first designed the library, we *assumed* that floating-point type images would always range from 0 to 1, and unsigned integers from 0 to 255.
 
-For floating point images, we're moving away from that design, because often you want to represent quantities that don't fit that mold: e.g., you may be looking at temperature or rainfall data.
+We are moving away from that design, because often you will find quantities that don't fit that mold (temperature or rainfall data, fluorescence microscopy images, ...).
 
-If you're just working with standard imaging data, continue to use 0-1.
+If you're working with standard imaging data, continue to use 0-1.
 
 When loading integer images (e.g., 0-255), you'll often want to convert those to floating point (0-1). You may do that using `img_as_float`:
 
