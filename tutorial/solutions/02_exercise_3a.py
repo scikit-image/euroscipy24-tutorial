@@ -6,5 +6,4 @@ gradient_horiz = ndi.correlate(pixelated.astype(float),
 
 fig, ax = plt.subplots(ncols=2)
 ax[0].imshow(gradient_vertical, cmap="gray");
-im = ax[1].imshow(gradient_horiz, cmap="gray");
-fig.colorbar(im)
+ax[1].imshow(gradient_horiz, cmap="gray");
