@@ -147,9 +147,9 @@ More at https://scikit-image.org/docs/stable/user_guide/data_types.html.
 
 ## Image I/O
 
-Mostly, we won't be using images from the scikit-image example datasets, but images stored on disk in JPEG, PNG, or TIFF format. Since scikit-image operates on NumPy arrays, *any* image reader library that returns arrays will do. We recommend `imageio`, but `matplotlib`, `pillow`, etc. also work.
+Usually, we don't use images from the scikit-image example datasets, but images stored on disk in JPEG, PNG, or TIFF format. Since scikit-image operates on NumPy arrays, *any* image reader library that returns arrays will do. We recommend `imageio`, but `matplotlib`, `pillow`, etc. also work.
 
-scikit-image provides a convenience wrapper around `image`, in the form of the `skimage.io` submodule:
+scikit-image provides a convenience wrapper around `imageio`, in the form of the `skimage.io` submodule:
 
 ```python
 image = ski.io.imread('./data/balloon.jpg')
