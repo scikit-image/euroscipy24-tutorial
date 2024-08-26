@@ -571,7 +571,7 @@ Here we use a step of 10, giving us every tenth column and every tenth row of th
 We are actually going to be using the pattern of plotting multiple images side by side quite often, so we are going to make the following helper function:
 
 ```python
-def imshow_all(*images, titles=None):
+def imshow_all(*images, titles=None, height=5):
     images = [ski.util.img_as_float(img) for img in images]
 
     if titles is None:
@@ -579,7 +579,6 @@ def imshow_all(*images, titles=None):
     vmin = min(map(np.min, images))
     vmax = max(map(np.max, images))
     ncols = len(images)
-    height = 5
     width = height * len(images)
     fig, axes = plt.subplots(nrows=1, ncols=ncols,
                              figsize=(width, height))
@@ -627,7 +626,8 @@ smooth_mean = ndi.correlate(bright_square, mean_kernel)
 sigma = 1
 smooth = ski.filters.gaussian(bright_square, sigma)
 imshow_all(bright_square, smooth_mean, smooth,
-           titles=['original', 'result of mean filter', 'result of gaussian filter'])
+           titles=['original', 'result of mean filter', 'result of gaussian filter'],
+           height=4)
 ```
 
 <!-- #region slideshow={"slide_type": "notes"} -->
