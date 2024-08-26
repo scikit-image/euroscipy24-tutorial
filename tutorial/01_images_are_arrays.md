@@ -152,7 +152,7 @@ Usually, we don't use images from the scikit-image example datasets, but images 
 scikit-image provides a convenience wrapper around `imageio`, in the form of the `skimage.io` submodule:
 
 ```python
-image = ski.io.imread('./data/balloon.jpg')
+image = ski.io.imread('data/balloon.jpg')
 
 print(type(image))
 print(image.dtype)
