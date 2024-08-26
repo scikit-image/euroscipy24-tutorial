@@ -37,7 +37,7 @@ Splitting an image into its constituent parts is known as *segmentation*.
 
 Think of Michelangelo, carving the statue of David. The block of marble is *segmented* into foreground and background. In this case, the background is discarded, and only the work of art remains.
 
-To be useful, segmentation has to be followed by *measurement* and *interpretation*. We measure attributes of the segments, and then interpret those measurements to ask some question. Ultimately, we want to know: are the cells healthy, or is the part manufactured correctly, or is the land flooded.
+To be useful, segmentation has to be followed by *measurement* and *interpretation*. We measure attributes of the segments, and then interpret those measurements to answer some question. Ultimately, we want to know: are the cells healthy, or is the part manufactured correctly, or is the land flooded.
 
 ```mermaid
 flowchart LR
@@ -49,7 +49,7 @@ C --> D[Interpretation]
 
 Let's consider that second block, the segmentation algorithm, for a moment.
 
-Scikit-image implements several intuitive, approximate (heuristic) algorithms for segmentation. These are typically *unsupervised*, based on rules around properties of the image / pixels, rather than on labeling examples of objects and non-objects. Neural network approaches, such as U-Net, DeepLab, and Mask R-CNN have proved very effective for segmenting images, given enough training data. These are likely what would be used in practice, unless sufficient labeled data is unavailable.
+Scikit-image implements several intuitive, approximate (heuristic) algorithms for segmentation. These are typically *unsupervised*, based on rules around properties of the image / pixels, rather than labeled examples of objects and non-objects. In practice, neural network approaches, such as U-Net, DeepLab, and Mask R-CNN have proved so effective for segmenting images, that they are commonly used as long as enough training data (labels) are available.
 
 In terms of this tutorial, we will show the pipeline above, with the understanding that the segmentation algorithm can always be swapped around for something more sophisticated. The results still have to be analysed.
 
@@ -59,16 +59,7 @@ In terms of this tutorial, we will show the pipeline above, with the understandi
 
 How shall we go about representing segmentations? We already know how to use `numpy` to represent images. Can we use the same concept here?
 
-Yes, we can create a *label* image, of the same size as the segmented image, with each value getting a different value.
-
-Here is a very simple image and segmentation, taken from [this scikit-image gallery example](https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_watershed.html#sphx-glr-auto-examples-segmentation-plot-watershed-py).
-
-```mermaid
-flowchart LR
-
-A[Generate test image] --> B[Watershed segmentation]
-B --> C[Visualize]
-```
+Yes, we can create a *label* image, of the same shape as the segmented image, in which each segment is assigned a different value.
 
 ```{code-cell} ipython3
 # Binary image
@@ -93,11 +84,20 @@ plt.imshow(smile);
 ```
 
 ```{code-cell} ipython3
-smile_label = ski.measure.label(smile)
-plt.imshow(smile_label);
+smile_labels = ski.measure.label(smile)
+plt.imshow(smile_labels);
 ```
 
 ### How do we arrive at label images in practice?
+
+Here is a very simple image and segmentation, taken from [this scikit-image gallery example](https://scikit-image.org/docs/dev/auto_examples/segmentation/plot_watershed.html#sphx-glr-auto-examples-segmentation-plot-watershed-py).
+
+```mermaid
+flowchart LR
+
+A[Generate test image] --> B[Watershed segmentation]
+B --> C[Visualize]
+```
 
 ```{code-cell} ipython3
 # Generate an initial image with two overlapping circles
@@ -184,7 +184,7 @@ ax[2].imshow(labels)
 ax[2].set_title('labels');
 ```
 
-Notice that "labels" is just a NumPy array with integer values. We have to be careful to interpret it as labels and not as an image.
+Notice that `labels` is just a NumPy array with integer values. We have to be careful to interpret it as labels and not as an image.
 
 +++
 
