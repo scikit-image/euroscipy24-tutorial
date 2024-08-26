@@ -690,7 +690,7 @@ If we have a look at a slice of the filtered result at its midpoint, we see the 
 <!-- #endregion -->
 
 ```python
-fig, ax = plt.subplots(1, 2, figsize=[9, 3], width_ratios=[1, 1.5])
+fig, ax = plt.subplots(1, 2, figsize=[9, 3], gridspec_kw={"width_ratios": [1, 1.5]})
 
 ax[0].imshow(kernel, cmap='gray')
 ax[0].vlines(kernel.shape[1] // 2, -100, 100)
