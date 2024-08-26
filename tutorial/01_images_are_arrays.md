@@ -51,6 +51,7 @@ plt.imshow(random_image, cmap='gray')
 plt.colorbar();
 ```
 
+The value of `random_image[i, j]` is the intensity value of the pixel located at coordinates `[i, j]`.
 The same holds for "real-world" images:
 
 ```python
