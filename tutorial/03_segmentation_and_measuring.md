@@ -33,7 +33,9 @@ One can think of an image as a projection of a scene, consisting of multiple obj
 
 Splitting an image into its constituent parts is known as *segmentation*.
 
-Think of Michaelangelo, carving the statue of David. The block of marble is *segmented* into foreground and background. In this case, the background is discarded, and only the work of art remains.
+<blockquote style="font-size: 120%;"><em>I saw the angel in the marble and carved until I set him free.</em> — Michelangelo (maybe)</blockquote>
+
+Think of Michelangelo, carving the statue of David. The block of marble is *segmented* into foreground and background. In this case, the background is discarded, and only the work of art remains.
 
 To be useful, segmentation has to be followed by *measurement* and *interpretation*. We measure attributes of the segments, and then interpret those measurements to ask some question. Ultimately, we want to know: are the cells healthy, or is the part manufactured correctly, or is the land flooded.
 
@@ -47,7 +49,7 @@ C --> D[Interpretation]
 
 Let's consider that second block, the segmentation algorithm, for a moment.
 
-Scikit-image implements several *heuristic* algorithms for segmentation. I.e., these are typically *unsupervised*, based on rules around properties of the image / pixels, rather than on labeling examples of objects and non-objects. Neural network approaches, such as U-Net, DeepLab, and Mask R-CNN have proved very effective for segmenting images, given enough training data. These are likely what would be used in practice, unless sufficient labeled data is unavailable.
+Scikit-image implements several intuitive, approximate (heuristic) algorithms for segmentation. These are typically *unsupervised*, based on rules around properties of the image / pixels, rather than on labeling examples of objects and non-objects. Neural network approaches, such as U-Net, DeepLab, and Mask R-CNN have proved very effective for segmenting images, given enough training data. These are likely what would be used in practice, unless sufficient labeled data is unavailable.
 
 In terms of this tutorial, we will show the pipeline above, with the understanding that the segmentation algorithm can always be swapped around for something more sophisticated. The results still have to be analysed.
 
@@ -69,6 +71,35 @@ B --> C[Visualize]
 ```
 
 ```{code-cell} ipython3
+# Binary image
+smile = np.zeros((40, 40), dtype=bool)
+
+# Left eye
+coords = ski.draw.disk((10, 10), 7)
+smile[*coords] = True
+coords = ski.draw.disk((10, 10), 7)
+smile[*coords] = True
+
+# Right eye
+coords = ski.draw.disk((10, 30), 7)
+smile[*coords] = True
+
+# Mouth
+smile[30:35, 5:35] = True
+smile[25:30, 5:10] = True
+smile[25:30, 30:35] = True
+
+plt.imshow(smile);
+```
+
+```{code-cell} ipython3
+smile_label = ski.measure.label(smile)
+plt.imshow(smile_label);
+```
+
+### How do we arrive at label images in practice?
+
+```{code-cell} ipython3
 # Generate an initial image with two overlapping circles
 x, y = np.indices((80, 80))
 x1, y1, x2, y2 = 28, 28, 44, 52
@@ -82,8 +113,19 @@ image = np.logical_or(mask_circle1, mask_circle2)
 plt.imshow(image);
 ```
 
+To break these two objects apart, we are going to use *watershed segmentation*.
+
 ```{code-cell} ipython3
-# Now we want to separate the two objects in image
+help(ski.segmentation.watershed)
+```
+
+**Signature:**
+
+```python
+watershed(image, markers=, mask=, ...)
+```
+
+```{code-cell} ipython3
 # Generate the markers as local maxima of the distance to the background
 distance = sp.ndimage.distance_transform_edt(image)
 
@@ -100,7 +142,7 @@ plt.imshow(distance);
 ```
 
 ```{code-cell} ipython3
-# What if we flipped it upside down?
+# What if we flipped it "upside down"?
 
 f, ax = plt.subplots(subplot_kw={"projection": "3d"})
 ax.view_init(elev=40, azim=-30)
@@ -148,7 +190,7 @@ Notice that "labels" is just a NumPy array with integer values. We have to be ca
 
 ## Counting coins
 
-(What to do once we've segmented an image.)
+(Or: what to do once we've segmented an image.)
 
 ```{code-cell} ipython3
 coins = ski.data.coins()
