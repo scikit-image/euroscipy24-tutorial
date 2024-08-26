@@ -236,10 +236,6 @@ Look up the documentation of `scipy.ndimage.convolve`. Apply the same convolutio
 # Solution here
 ```
 
-```python
-%load solutions/02_exercise_1.py
-```
-
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### A difference filter
 <!-- #endregion -->
@@ -744,15 +740,7 @@ vertical_kernel.shape
 ```
 
 ```python
-%load solutions/02_exercise_3a.py
-```
-
-```python
 # Solution here
-```
-
-```python
-%load solutions/02_exercise_3b.py
 ```
 
 <!-- #region editable=true slideshow={"slide_type": "slide"} -->
