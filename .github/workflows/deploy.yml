@@ -21,14 +21,13 @@ jobs:
       - name: Install the dependencies
         run: |
           python -m pip install -r requirements/jupyterlite.txt
-      - name: Prepare directory
         # Jupytext is not supported in JupyterLite yet
         # Using plain ipynb format is also simpler to teach
+      - name: Convert to ipynb format
         run: |
           find tutorial/ -name "*.md" \
             -exec jupytext --to ipynb {} \; \
             -exec rm {} \;
-          cp README.md tutorial
       - name: Build the JupyterLite site
         run: |
           jupyter lite build --contents tutorial --output-dir dist
